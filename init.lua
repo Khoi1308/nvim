@@ -23,34 +23,27 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local opts = {}
-local plugins = { 
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-    {
-        'nvim-telescope/telescope.nvim', 
-        tag = '0.1.6',
-        dependencies = { 'nvim-lua/plenary.nvim' }
-    },
-    {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"}
-}
-
 -- Package management
-require("lazy").setup(plugins, opts)
+require("lazy").setup("plugins")
 
 -- Search file && source code 
 local builtin = require("telescope.builtin")
+
 vim.keymap.set('n', '<C-p>', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+
+-- Neo-tree
+vim.keymap.set('n', '<leader>op', ':Neotree filesystem reveal left<CR>', {})
 
 -- Treesitter
 local configs = require("nvim-treesitter.configs")
 
-      configs.setup({
-          ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html" },
-          sync_install = false,
-          highlight = { enable = true },
-          indent = { enable = true },  
-        })
+configs.setup({
+  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html" },
+  sync_install = false,
+  highlight = { enable = true },
+  indent = { enable = true },  
+})
 
 -- Color scheme
 require("catppuccin").setup()
