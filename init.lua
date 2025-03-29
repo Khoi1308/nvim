@@ -1,4 +1,4 @@
--- Enable clipboard 
+-- Enable clipboard
 vim.opt.clipboard = "unnamedplus"
 vim.o.guifont = "DejaVuSansM Nerd Font Mono Regular:h14" -- Thay h12 bằng kích thước phù hợp (ví dụ: 11, 12, 14)
 
