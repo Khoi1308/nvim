@@ -1,7 +1,10 @@
--- Enable clipboard
-vim.opt.guifont = "DejaVuSansM Nerd Font Mono Regular:h14" -- Thay h12 bằng kích thước phù hợp (ví dụ: 11, 12, 14)
+if vim.g.neovide then
+  vim.o.guifont = "DejaVuSansM Nerd Font Mono:h14"
+end
 
+-- Declare the path where lazy will clone plugin code
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+-- Check if not clone lazy-vim, it clone into lazy.nvim directory
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -13,6 +16,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
+
 require("configs.options")
 require("configs.keymaps")
 -- Package management
