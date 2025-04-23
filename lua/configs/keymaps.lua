@@ -13,12 +13,6 @@ keymap.set("n", "<leader>wj", "<c-w>j", { desc = "Move down window" })
 keymap.set("n", "<leader>wk", "<c-w>k", { desc = "Move up window" })
 
 keymap.set("n", "<Esc>", ":nohlsearch<CR>", { desc = "Remove highlight search" })
--- Modify tab
-keymap.set("n", "<leader>tc", ":tabnew<CR>", { desc = "Create tab" })
-keymap.set("n", "<leader>ts", ":tabs<CR>", { desc = "Show all tab" })
-keymap.set("n", "<leader>tx", ":tabclose<CR>", { desc = "Close tab" })
-keymap.set("n", "<leader>th", ":tabNext<CR>", { desc = "Move previous tab" })
-keymap.set("n", "<leader>tl", ":tabnext<CR>", { desc = "Move next tab" })
 
-keymap.set("v", "<", "<gv", { desc = "Indent left to visual mode"})
-keymap.set("v", ">", ">gv", { desc = "Indent right to visual mode"})
+keymap.set("v", "<", "<gv", { desc = "Indent left to visual mode" })
+keymap.set("v", ">", ">gv", { desc = "Indent right to visual mode" })
