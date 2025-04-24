@@ -1,6 +1,9 @@
 return {
 	{
 		"williamboman/mason.nvim",
+		opts = {
+			ensure_installed = { "clangd", "clangd-format", "codelldb"},
+		},
 
 		config = function()
 			require("mason").setup()
@@ -19,7 +22,7 @@ return {
 		"jay-babu/mason-nvim-dap.nvim",
 		config = function()
 			require("mason-nvim-dap").setup({
-				ensure_installed = { "java-debug-adapter", "java-test" },
+				ensure_installed = { "java-debug-adapter", "java-test", "codelldb" },
 			})
 		end,
 	},
