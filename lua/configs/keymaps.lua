@@ -16,3 +16,5 @@ keymap.set("n", "<Esc>", ":nohlsearch<CR>", { desc = "Remove highlight search" }
 
 keymap.set("v", "<", "<gv", { desc = "Indent left to visual mode" })
 keymap.set("v", ">", ">gv", { desc = "Indent right to visual mode" })
+
+keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Hover errors" })

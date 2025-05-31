@@ -24,6 +24,7 @@ return {
 			dapui.close()
 		end
 
+		-- C plus plus
 		dap.adapters.codelldb = {
 			type = "server",
 			port = "${port}",
@@ -45,9 +46,34 @@ return {
 				stopOnEntry = false,
 			},
 		}
+
+		-- JavaScript
+		dap.adapters["pwa-node"] = {
+			type = "server",
+			host = "localhost",
+			port = 3000,
+			executable = {
+				command = "node",
+				-- 💀 Make sure to update this path to point to your installation
+				args = { "./js-debug-dap-v1.100.0/js-debug/src/dapDebugServer.js", "${port}" },
+			},
+		}
+
+		dap.configurations.javascript = {
+			{
+				type = "pwa-node",
+				request = "launch",
+				name = "Launch file",
+				program = "${file}",
+				cwd = "${workspaceFolder}",
+			},
+		}
+
 		-- Keymap
 		vim.keymap.set("n", "<leader>dp", dap.toggle_breakpoint, { desc = "[D]ebug toggle break[P]oint" })
 		vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "[D]ebug [C]ontinue" })
+		vim.keymap.set("n", "<leader>dx", dap.disconnect, { desc = "[D]ebug Disconnect" })
+		-- vim.keymap.set("n", "<leader>dr", dap.restart, { desc = "[D]ebug [R]estart" })
 		vim.keymap.set("n", "<C-n>", dap.step_into, { desc = "[D]ebug step into" })
 	end,
 }

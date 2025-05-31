@@ -2,7 +2,7 @@ return {
 	{
 		"williamboman/mason.nvim",
 		opts = {
-			ensure_installed = { "clangd", "clangd-format", "codelldb"},
+			ensure_installed = { "clangd", "clangd-format", "codelldb", "ts_ls", "eslint-lsp", "gopls" },
 		},
 
 		config = function()
@@ -13,7 +13,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "ts_ls", "clangd", "jdtls" },
+				ensure_installed = { "lua_ls", "ts_ls", "clangd", "jdtls", "gopls" },
 			})
 		end,
 	},
@@ -38,6 +38,7 @@ return {
 		lazy = false,
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			local util = require("lspconfig/util")
 
 			capabilities.textDocument.foldingRange = {
 				dynamicRegistration = false,
@@ -54,6 +55,21 @@ return {
 			lspconfig.clangd.setup({
 				capabilities = capabilities,
 			})
+			lspconfig.gopls.setup({
+				capabilities = capabilities,
+				cmd = { "gopls" },
+				filetypes = { "go", "gomod", "gowork", "gotmpl" },
+				root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+				settings = {
+					gopls = {
+						completeUnimported = true,
+						analyses = {
+							unusedparams = true,
+						},
+					},
+				},
+			})
+
 			-- Key map
 			vim.keymap.set("n", "<leader>ch", vim.lsp.buf.hover, { desc = "[C]ode [H]over documentation" })
 			vim.keymap.set("n", "<leader>cd", vim.lsp.buf.definition, { desc = "[C]ode goto [D]efinition " })
