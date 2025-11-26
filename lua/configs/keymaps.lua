@@ -18,3 +18,7 @@ keymap.set("v", "<", "<gv", { desc = "Indent left to visual mode" })
 keymap.set("v", ">", ">gv", { desc = "Indent right to visual mode" })
 
 keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Hover errors" })
+
+-- Toggle fold
+keymap.set("n", "<Tab>", "za", { desc = "Toggle fold" })
+keymap.set("n", "<leader>cH", ":TSBufEnable highlight<CR>", {desc = "[C]ode [H]ighlight"})

@@ -3,7 +3,6 @@ return {
 	priority = 1000,
 	config = function()
 		local transparent = true -- set to true if you would like to enable transparency
-
 		local bg = "#011628"
 		local bg_dark = "#011423"
 		local bg_highlight = "#143652"
@@ -38,8 +37,41 @@ return {
 				colors.fg_gutter = fg_gutter
 				colors.fg_sidebar = fg_dark
 			end,
+			-- ✨ THÊM CUSTOM HIGHLIGHTS CHO FOLD
+			on_highlights = function(highlights, colors)
+				-- Custom fold colors
+				highlights.Folded = {
+					bg = transparent and colors.none or "#1a2332", -- Darker blue background
+					fg = "#7aa2f7", -- Light blue text
+					italic = true,
+				}
+
+				highlights.FoldColumn = {
+					bg = transparent and colors.none or colors.bg_dark,
+					fg = "#565f89", -- Subtle gray for fold column
+				}
+
+				-- Optional: Custom fold virtual text
+				highlights.UfoFoldedFg = { fg = "#c0caf5" }
+				highlights.UfoFoldedBg = { bg = "#1a2332" }
+
+				-- Optional: Customize fold icons/chars
+				highlights.FoldMarker = {
+					fg = "#7aa2f7",
+					bg = transparent and colors.none or colors.bg,
+				}
+			end,
 		})
 
-		vim.cmd("colorscheme tokyonight")
+		vim.cmd.colorscheme("tokyonight") -- set our colorscheme
+
+		-- ✨ OPTIONAL: Additional fold settings
+		vim.opt.fillchars:append({
+			fold = " ",
+			foldopen = "-",
+			foldclose = "+",
+			foldsep = " ",
+		})
+		vim.opt.foldcolumn = "1"
 	end,
 }
