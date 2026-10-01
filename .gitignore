@@ -1,0 +1,41 @@
+# ==========================================
+# Neovim Configuration - Git Ignore
+# ==========================================
+
+# Thư mục / file tilde (thường do gõ nhầm lệnh đường dẫn ~/ trên Windows hoặc file backup)
+~/
+~*
+*~
+
+# Bộ debug adapters & binaries tải thủ công
+js-debug/
+js-debug-*/
+*js-debug*
+vscode-js-debug/
+codelldb/
+extension/
+
+# Neovim swap, backup, và undo files
+*.swp
+*.swo
+*.swn
+*.sw?
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+*.un~
+Session.vim
+Sessionx.vim
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Node dependencies (nếu có)
+node_modules/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini

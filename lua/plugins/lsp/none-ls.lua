@@ -1,3 +1,4 @@
+-- Format & Linter
 return {
   {
     "nvimtools/none-ls.nvim",
@@ -10,8 +11,6 @@ return {
         sources = {
           -- Lua language
           null_ls.builtins.formatting.stylua,
-          -- Set up eslint for JS
-          require("none-ls.diagnostics.eslint_d"),
           -- Set up prettier to format languages that are not lua
           null_ls.builtins.formatting.prettier,
           -- Ruby language
