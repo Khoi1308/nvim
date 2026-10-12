@@ -23,6 +23,10 @@ return {
           null_ls.builtins.formatting.gofumpt,
           null_ls.builtins.formatting.goimports_reviser,
           null_ls.builtins.formatting.golines,
+          -- Python
+          require("none-ls.diagnostics.ruff"),
+          require("none-ls.formatting.ruff"),
+          require("none-ls.formatting.ruff_format"),
         },
       })
 

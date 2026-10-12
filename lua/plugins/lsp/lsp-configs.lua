@@ -2,7 +2,7 @@ return {
   {
     "williamboman/mason.nvim",
     opts = {
-      ensure_installed = { "clangd", "clangd-format", "codelldb", "ts_ls", "eslint-lsp", "gopls", "jsonls" },
+      ensure_installed = { "clangd", "clangd-format", "codelldb", "ts_ls", "eslint-lsp", "gopls", "jsonls", "pyright", "ruff" },
     },
 
     config = function()
@@ -13,7 +13,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "ts_ls", "eslint", "clangd", "jdtls", "gopls" },
+        ensure_installed = { "lua_ls", "ts_ls", "eslint", "clangd", "jdtls", "gopls", "pyright" },
       })
     end,
   },
@@ -109,12 +109,43 @@ return {
             },
           },
         },
-        lspconfig.jsonls.setup({
-          capabilities = capabilities,
-          settings = {
-            json = { schemas = require("schemastore").json.schemas(), validate = { enable = true }, },
+      })
+      lspconfig.jsonls.setup({
+        capabilities = capabilities,
+        settings = {
+          json = { schemas = require("schemastore").json.schemas(), validate = { enable = true } },
+        },
+      })
+      lspconfig.pyright.setup({
+        capabilities = capabilities,
+        before_init = function(_, config)
+          local root = config.root_dir or vim.fn.getcwd()
+          local venv_path = util.path.join(root, ".venv")
+          local python_win = util.path.join(venv_path, "Scripts", "python.exe")
+          local python_unix = util.path.join(venv_path, "bin", "python")
+
+          local python_path = nil
+          if vim.fn.filereadable(python_win) == 1 then
+            python_path = python_win
+          elseif vim.fn.filereadable(python_unix) == 1 then
+            python_path = python_unix
+          end
+
+          if python_path then
+            config.settings = config.settings or {}
+            config.settings.python = config.settings.python or {}
+            config.settings.python.pythonPath = python_path
+          end
+        end,
+        settings = {
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
+              diagnosticMode = "openFilesOnly",
+            },
           },
-        })
+        },
       })
 
       -- Key map

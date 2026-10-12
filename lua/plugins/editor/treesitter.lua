@@ -18,6 +18,7 @@ return {
 				"html",
 				"typescript",
 				"tsx",
+				"python",
 			},
 		})
 
